@@ -190,8 +190,8 @@ animate();
         typewriterElement.innerHTML = currentPhrase;
         typewriterElement.classList.add("cursor");
         
-        const typingSpeed = isDeleting ? 30 : 500;
-        const pauseTime = isDeleting ? 500 : 800;
+        const typingSpeed = isDeleting ? 30 : 100;
+        const pauseTime = isDeleting ? 500 : 900;
         
         if (!isDeleting && letterIndex === phrases[phraseIndex].length) {
             setTimeout(typeWriter, pauseTime);
@@ -203,4 +203,7 @@ animate();
         }
     }
 
-    document.addEventListener("DOMContentLoaded", typeWriter); 
+    document.addEventListener("DOMContentLoaded", typeWriter);
+
+
+    
