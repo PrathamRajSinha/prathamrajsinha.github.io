@@ -12,10 +12,11 @@
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#resume-section">Resume</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#more-about-me">More About Me</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
             </ul>
         </nav>
     </header>
@@ -28,9 +29,22 @@
         <img src="images/vending.png" id="vending" data-speed="0.9">
         <img src="images/boy.png" id="boy" data-speed="1.1">
         <div class="parallax-content">
-            <h1 id="heading">Pratham Raj Sinha</h1>
+            <h1 style="size: 1000px;">Pratham Raj Sinha</h1>
+
+            <div class="container">
+                <div id="typewriter"></div>
+            </div>
+            
             <p id="links">Bengaluru, India | +91 9148253924 | prathamrajsinha@gmail.com</p>
         </div>
+        <div id="fireflies-container"></div>
+        <div id="android-fairy" style="display: none;">
+            <svg class="android-body" viewBox="0 0 24 24">
+                <path d="M15,5H14V4H15M10,5H9V4H10M15.53,2.16L16.84,0.85C17.03,0.66 17.03,0.34 16.84,0.14C16.64,-0.05 16.32,-0.05 16.13,0.14L14.65,1.62C13.85,1.23 12.95,1 12,1C11.04,1 10.14,1.23 9.34,1.63L7.85,0.14C7.66,-0.05 7.34,-0.05 7.15,0.14C6.95,0.34 6.95,0.66 7.15,0.85L8.46,2.16C6.97,3.26 6,5 6,7H18C18,5 17,3.25 15.53,2.16M20.5,8A1.5,1.5 0 0,0 19,9.5V16.5A1.5,1.5 0 0,0 20.5,18A1.5,1.5 0 0,0 22,16.5V9.5A1.5,1.5 0 0,0 20.5,8M3.5,8A1.5,1.5 0 0,0 2,9.5V16.5A1.5,1.5 0 0,0 3.5,18A1.5,1.5 0 0,0 5,16.5V9.5A1.5,1.5 0 0,0 3.5,8M6,18A1,1 0 0,0 7,19H8V22.5A1.5,1.5 0 0,0 9.5,24A1.5,1.5 0 0,0 11,22.5V19H13V22.5A1.5,1.5 0 0,0 14.5,24A1.5,1.5 0 0,0 16,22.5V19H17A1,1 0 0,0 18,18V8H6V18Z" />
+            </svg>
+            <div class="wing left-wing"></div>
+            <div class="wing right-wing"></div>
+
     </section>
 
     <div class="section" id="resume-section">
@@ -46,15 +60,22 @@
         
         <div class="resume-item">
             <h3>Education</h3>
-            <p>Master of Technology in Information Technology, PES University, Bangalore (2022)</p>
-            <p>Bachelor of Engineering in Computer Science, PES University, Bangalore (2020)</p>
+            <p>Bachelor of Technology in Information Technology, Vellore Institute of Technology, Vellore <i>(Present)</i> <b>CGPA: 8.57</b></p>
         </div>
         
         <div class="resume-item">
             <h3>Experience</h3>
-            <p><strong>Thomson Reuters</strong> - Software Engineer (2022-Present)</p>
-            <ul>
-                <li>Part of the Identity and Access Management team working on automation of application onboarding, access review, and security.</li>
+            <p><strong><a href="https://piatrika.com/">Piatrika Biosystems</a></strong> - Data Science and Machine Learning Intern <i>(Aug 2023 - Dec 2023)</i></p>
+            <ul style="list-style: circle;">
+                <li>Piatrika Biosystems uses AI and ML to optimize crop breeding and accelerate development of sustainable seeds and
+                    agrochemicals, enhancing agricultural productivity and efficiency.
+                </li>
+                <li><b>Architected a scalable framework for parallel testing of over 5 machine learning models using Python, accelerating
+                    model validation speed by 40% and slashing overall testing time by 50%</b>
+                </li>
+                <li>strated adaptability in applying data preprocessing, machine learning techniques like hyper-parameter tuning,
+                    and implemented new algorithms like SAHI and Kornrows
+                </li>
             </ul>
         </div>
         
@@ -65,13 +86,18 @@
         
         <div class="resume-item">
             <h3>Certifications</h3>
-            <p>Python for Data Structures, Algorithms; Automated Machine Learning BootCamp - Udemy</p>
+            <ul style="list-style: circle;">
+                <li><a href="https://www.udemy.com/certificate/UC-afd82cc8-c3c8-4d75-bc6e-069a084edc56/">Python for Data Structures, Algorithms</a></li>
+                <li><a href="https://www.udemy.com/certificate/UC-11d33ca5-4ea5-4798-88c3-511b60f12eb5/">Automated Machine Learning BootCamp</a></li>
+            </ul>
         </div>
         
         <div class="resume-item">
-            <h3>Additional</h3>
-            <p>Languages: English, Hindi, Bengali, Kannada: Proficient | Japanese, Spanish: Basic (Learning)</p>
-            <p>Interests: Music: Play the Piano, Tabla and Beatbox. Sports: Enjoy playing Badminton and Table tennis. Travel: Exploring similitude in cultures.</p>
+            <h3>Interests</h3>
+            <ul style="list-style: circle;">
+            <li>Language known: English, Hindi, Bengali, Kannada: Proficient | Japanese, Spanish: Basic (Learning)</li>
+            <li>Interests: Music: Play the Piano, Tabla and Beatbox. Sports: Enjoy playing Badminton and Table tennis. Travel: Exploring similitude in cultures.</li>
+            </ul>
         </div>
     </div>
 
@@ -88,30 +114,59 @@
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <img src="images/main.jpg" alt="Avatar" style="width:300px;height:300px;">
+                        <img src="images/card.png" alt="Avatar" style="width:300px;height:300px;">
+                        <div class="overlay">
+                            <h3>Email Spam Detection</h3>
+\                        </div>
                     </div>
                     <div class="flip-card-back">
-                        <h1>Email Spam detection using multiple Machine Learning models.</h1>  
+                        <p>Architected and compared various machine learning models for email spam detection
+                            RandomForest achieved an <b>accuracy of 90.07%</b>, identifying spam emails by analyzing common words and enhancing
+                            email security against phishing and scams.
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <img src="images/main.jpg" alt="Avatar" style="width:300px;height:300px;">
+                        <img src="images/card.png" alt="Avatar" style="width:300px;height:300px;">
+                        <div class="overlay">
+                            <h3>Research on Diabetes Prediction</h3>
+                        </div>
                     </div>
                     <div class="flip-card-back">
-                        <h1>Research on Diabetes Prediction using PIMA dataset.</h1>  
+                        <p>Leveraged Gradient Boost, Neural Networks, Logistic Regression, Support Vector Machine, Linear Discriminant Analysis,
+                            and Decision Trees to predict diabetes with the PIMA dataset. Obtained an <b>accuracy of 92%.</b></p>  
                     </div>
                 </div>
             </div>
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <img src="images/main.jpg" alt="Avatar" style="width:300px;height:300px;">
+                        <img src="images/card.png" alt="Avatar" style="width:300px;height:300px;">
+                        <div class="overlay">
+                            <h3>Research on Homomorphic Encryption</h3>
+                        </div>
                     </div>
                     <div class="flip-card-back">
-                        <h1>Research on Homomorphic Encryption.</h1>  
+                        <p>Dissected Homomorphic Encryption (HE) schemes and their applications. Highlighted how HE enables computations
+                            on encrypted data without decryption, enhancing data privacy and security.</p>  
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="images/card.png" alt="Avatar" style="width:300px;height:300px;">
+                        <div class="overlay">
+                            <h3>Information Security Implementations</h3>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>Developed multiple information security systems: intelligent cryptography, blind sign authentication using RSA, digital
+                            envelope, and vulnerability testing using 64 bit keys. These serve as models for studying cryptography, authentication,
+                            secure communication (digital envelopes), and vulnerability testing in information security.</p>  
                     </div>
                 </div>
             </div>
@@ -147,26 +202,9 @@
         <h2>Contact Me</h2>
         <p>Feel free to reach out via <a href="mailto:prathamrajsinha@gmail.com">Email</a> or connect with me on <a href="https://www.linkedin.com/in/pratham-raj-sinha/" target="_blank">LinkedIn</a>.</p>
     </section>
+</div>
 
-    <script>
-        window.addEventListener('scroll', function() {
-            var parallaxSections = document.querySelectorAll('.parallax-section');
-            var scrollPosition = window.pageYOffset;
-
-            parallaxSections.forEach(function(section) {
-                var sectionTop = section.offsetTop;
-                var sectionHeight = section.offsetHeight;
-                var images = section.querySelectorAll('img');
-
-                if (scrollPosition > sectionTop - window.innerHeight && scrollPosition < sectionTop + sectionHeight) {
-                    images.forEach(function(img) {
-                        var speed = img.getAttribute('data-speed');
-                        var yPos = (scrollPosition - sectionTop) * speed;
-                        img.style.transform = 'translateY(' + yPos + 'px)';
-                    });
-                }
-            });
-        });
-    </script>
+ 
+<script src="script.js"></script>
 </body>
 </html>

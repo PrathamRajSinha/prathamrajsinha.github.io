@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, rgb(255, 175, 244), rgb(254, 89, 246), rgb(236, 255, 115), rgb(158, 54, 255), rgb(64, 255, 176), rgb(43, 85, 255));
+            background-size: 300% 300%;
+            animation: gradientAnimation 20s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+            background-color: rgba(76, 0, 255, 0.8);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.396);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        nav ul li a:hover {
+            background-color: rgb(195, 91, 255);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px 20px;
+        }
+
+        .blog-post {
+            background-color: rgba(0, 0, 0, 0.579);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .blog-post h2 {
+            color: #fff;
+            margin-top: 0;
+        }
+
+        .blog-post .date {
+            color: #ddd;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                top: 10px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 5px;
+            }
+
+            nav ul li a {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <article class="blog-post">
+            <h2>My First Blog Post</h2>
+            <p class="date">Published on July 16, 2024</p>
+            <h1>My opinion on timetables</h1>
+            <p>A time table is a touche' way of temporarily narrowing down future possibilities to predetermined events which is also temporary as it is completely based on the mood and health of the person  who is responsible for this time heist...yes,i called it time heist because...it is what it is...hours wasted just because someone literally forced a whole crowd of people to incidentally and not coincidentally be at the same place and at the same time (mentallly or virtually or physically) without giving them the choice of changing their own future,...which is again based on the health...and to a minor extent mood of the person....just because of preconcieved notions that are biased on the thought that everyone's going to "waste time" on something useless(in their perspective)......we are asked to focus on a subject in a certain angle that all lay men see but how is thateducation?...that is just another way of storing data...the same data in the minds of 100s of young minds which have the capability of using their knowledge and not only memorise conclusions based on the theories of our ancestors who used this very knowledge......the only thing according to me that can change our future is us...and a major componant that defies how we change it is health, mood and will...we are our own gods</p>
+        </article>
+        
+        <article class="blog-post">
+            <h2>Coming soon...</h2>
+        </article>
+    </div>
+</body>
+</html>

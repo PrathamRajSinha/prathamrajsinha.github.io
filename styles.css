@@ -1,10 +1,88 @@
 
   body {
     min-height: 100vh;
-    background: linear-gradient(-45deg, pink, white, lemonchiffon, violet, indigo, purple);
+    background: linear-gradient(-45deg, rgb(255, 175, 244), rgb(254, 89, 246), rgb(236, 255, 115), rgb(158, 54, 255), rgb(64, 255, 176), rgb(43, 85, 255));
     background-size: 300% 300%;
-    animation: gradientAnimation 20s ease infinite;
+    animation: gradientAnimation 10s ease infinite;
   }
+  header {
+    position: fixed;
+    top: 20px; /* Adjust for desired distance from top */
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+    background-color: rgba(76, 0, 255, 0.8); /* Semi-transparent green */
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: float 4s ease-in-out infinite;
+    
+
+}
+
+header nav ul li a:hover {
+    background-color: rgb(195, 91, 255); 
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    
+}
+
+/* Remove body padding since header is no longer full-width */
+body {
+    padding-top: 0;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        top: 10px;
+    }
+
+    header nav ul {
+        flex-wrap: wrap;
+    }
+
+    header nav ul li {
+        margin: 5px;
+    }
+
+    header nav ul li a {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
 
   @keyframes gradientAnimation {
     0% {
@@ -21,23 +99,6 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-        }
-        header nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            background: #333;
-        }
-        header nav ul li {
-            margin: 0 15px;
-        }
-        header nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            padding: 15px 0;
-            display: block;
         }
         .parallax-section {
             min-height: 100vh;
@@ -96,9 +157,10 @@
             padding: 50px 20px;
         }
         #resume-section h2 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             font-size: 36px;
             margin-bottom: 20px;
-            color: #616eff;
+            color: #ffffff;
         }
         #resume-section p, #resume-section ul, #resume-section a {
             font-size: 16px;
@@ -106,7 +168,11 @@
             margin: 10px 0;
         }
         #resume-section a {
-            color: #616eff;
+            color: #ff5c5c;
+            text-decoration: none;
+        }
+        #resume-section a:hover {
+            color: #fff94d;
             text-decoration: none;
         }
         #resume-section ul {
@@ -116,7 +182,7 @@
         .resume-item {
             margin: 20px 0;
             text-align: left;
-            border: 1px solid #ddd;
+            border: 1px solid #000000;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -142,6 +208,8 @@
             perspective: 1000px;
             display: inline-block;
             margin: 20px;
+            border: #000000;
+            border: 1px;
         }
         #projects .flip-card-inner {
             position: relative;
@@ -165,9 +233,10 @@
             color: black;
         }
         #projects .flip-card-back {
-            background-color: #ba59ee;
+            background-color: #ff8080;
             color: white;
             transform: rotateY(180deg);
+            font-size: 100;
         }
         
         #contact {
@@ -256,3 +325,108 @@
         #leaf { top: 0%; left: 0%; }
         #plant { top: 0%; left: 0%; }
 
+        #android-fairy {
+            position: absolute;
+            width: 50px; /* Smaller size */
+            height: 50px;
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
+        }
+        
+        .android-body {
+            width: 100%;
+            height: 100%;
+            fill: #a0e57c;
+            filter: drop-shadow(0 0 5px #a0e57c);
+        }
+        
+        .wing {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            top: 10px;
+            border-radius: 50% 50% 0 50%;
+        }
+        
+        .left-wing {
+            left: -15px;
+            transform-origin: right center;
+            animation: flapLeft 0.5s infinite ease-in-out;
+        }
+        
+        .right-wing {
+            right: -15px;
+            transform-origin: left center;
+            animation: flapRight 0.5s infinite ease-in-out;
+        }
+        
+        @keyframes flapLeft {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(60deg); }
+        }
+        
+        @keyframes flapRight {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(-60deg); }
+        }
+        
+        .firefly.hidden {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        #fireflies-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .firefly {
+            position: absolute;
+            background: #ffffe0;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #ffffe0, 0 0 10px #ffffe0, 0 0 20px #ffffe0;
+            transition: opacity 0.3s ease;
+        }
+
+        #typewriter {
+            font-size: 1.5em;
+            min-height: 1.5em;
+        }
+        .cursor {
+            border-right: 2px solid #000;
+            animation: blink 0.7s step-end infinite;
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: rgb(0, 255, 170);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.156);
+            text-align: center;
+        }
+        
+        .overlay h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+        
+        .overlay p {
+            margin: 0;
+            font-size: 1em;
+        }
