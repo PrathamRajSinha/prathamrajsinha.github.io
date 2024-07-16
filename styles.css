@@ -1,0 +1,258 @@
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, pink, white, lemonchiffon, violet, indigo, purple);
+    background-size: 300% 300%;
+    animation: gradientAnimation 20s ease infinite;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background: #333;
+        }
+        header nav ul li {
+            margin: 0 15px;
+        }
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 0;
+            display: block;
+        }
+        .parallax-section {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transform: translateY(0);
+            will-change: transform;
+        }
+        #home .parallax-bg {
+            background-image: url('images/background.jpeg');
+        }
+        .parallax-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .parallax-section img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            width: 100%;
+            transition: transform 0.1s;
+        }
+        #heading, #links, #heading_projects {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        #heading, #heading_projects {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        #links {
+            font-size: 1.5em;
+        }
+        
+        .section {
+            padding: 50px 20px;
+        }
+        #resume-section {
+            color: #333;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        #resume-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #616eff;
+        }
+        #resume-section p, #resume-section ul, #resume-section a {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        #resume-section a {
+            color: #616eff;
+            text-decoration: none;
+        }
+        #resume-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .resume-item {
+            margin: 20px 0;
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: #fff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .resume-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .resume-item h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .resume-item p, .resume-item ul {
+            margin: 0;
+        }
+        
+        #projects .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+            display: inline-block;
+            margin: 20px;
+        }
+        #projects .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        #projects .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        #projects .flip-card-front, #projects .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        #projects .flip-card-front {
+            background-color: #bbb;
+            color: black;
+        }
+        #projects .flip-card-back {
+            background-color: #ba59ee;
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        #contact {
+            text-align: center;
+            padding: 50px;
+            background: #333;
+            color: #fff;
+        }
+        #contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        #more-about-me {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        #more-about-me h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        #more-about-me .instagram-reel {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #more-about-me .instagram-reel:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        #more-about-me .instagram-reel img {
+            width: 100%;
+            height: auto;
+        }
+        #more-about-me .extra-curriculars {
+            margin-top: 50px;
+        }
+        #more-about-me .extra-curriculars h3 {
+            font-size: 24px;
+            color: #333;
+        }
+        #more-about-me .extra-curriculars ul {
+            list-style: none;
+            padding: 0;
+            font-size: 18px;
+        }
+        #more-about-me .extra-curriculars ul li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #more-about-me .extra-curriculars ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            #heading, #heading_projects {
+                font-size: 2em;
+            }
+            #links {
+                font-size: 1em;
+            }
+        }
+        #boy { top: 0%; left: 0%; }
+        #vending { top: -20%; left: 15%; }
+        #fridge { top: -20%; left: 10%; }
+        #newhill1 { top: -30%; left: 0%; }
+        #newhill2 { top: -28%; left: 0%; }
+        #hill1 { top: 0%; left: 0%; }
+        #hill2 { top: 0%; left: 0%; }
+        #hill3 { top: 0%; left: 0%; }
+        #hill4 { top: 0%; left: 0%; }
+        #hill5 { top: 0%; left: 0%; }
+        #tree { top: 0%; left: 0%; }
+        #leaf { top: 0%; left: 0%; }
+        #plant { top: 0%; left: 0%; }
+
