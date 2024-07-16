@@ -430,3 +430,23 @@ body {
             margin: 0;
             font-size: 1em;
         }
+
+        .parallax-content .name {
+            font-size: 4rem; /* or 5rem, or whatever size you prefer */
+            font-weight: bold;
+            color: #ffc0c0;
+            text-shadow: #000;
+            animation: float2 4s ease-in-out infinite;
+
+        }
+        @keyframes float2 {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
