@@ -81,10 +81,25 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 20px 20px;
-        }
+    width: 100%;
+    max-width: 800px; /* Adjust this value as needed */
+    margin: 0 auto;
+}
+
+.blog-post {
+    width: 100%;
+}
+
+.image-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
         .blog-post {
             background-color: rgba(0, 0, 0, 0.579);
@@ -123,6 +138,10 @@
                 font-size: 0.9em;
             }
         }
+        .container img{
+  object-fit: contain;
+  object-position: center;
+}
     </style>
 </head>
 <body>
@@ -137,13 +156,17 @@
     <div class="container">
         <article class="blog-post">
             <h2>My First Blog Post</h2>
-            <p class="date">Published on July 16, 2024</p>
+            <p class="date">Published in December, 2023</p>
             <h1>My opinion on timetables</h1>
             <p>A time table is a touche' way of temporarily narrowing down future possibilities to predetermined events which is also temporary as it is completely based on the mood and health of the person  who is responsible for this time heist...yes,i called it time heist because...it is what it is...hours wasted just because someone literally forced a whole crowd of people to incidentally and not coincidentally be at the same place and at the same time (mentallly or virtually or physically) without giving them the choice of changing their own future,...which is again based on the health...and to a minor extent mood of the person....just because of preconcieved notions that are biased on the thought that everyone's going to "waste time" on something useless(in their perspective)......we are asked to focus on a subject in a certain angle that all lay men see but how is thateducation?...that is just another way of storing data...the same data in the minds of 100s of young minds which have the capability of using their knowledge and not only memorise conclusions based on the theories of our ancestors who used this very knowledge......the only thing according to me that can change our future is us...and a major componant that defies how we change it is health, mood and will...we are our own gods</p>
         </article>
         
         <article class="blog-post">
-            <h2>Coming soon...</h2>
+            <h2>Advancements in Technology</h2>
+            <p class="date">Published in January, 2024</p>
+            <h1></h1>
+            <img src="images/1703438858065.jpeg" class="image-container">
+            <p>Over the past two decades, the trajectory of technological progress from 2000 to 2023 has been nothing short of revolutionary. At the turn of the millennium, the world witnessed the rise of the internet, marking the advent of a digital age. The early 2000s were dominated by the proliferation of personal computers and the infancy of mobile technology. As the years unfolded, the landscape transformed with the advent of social media, smartphones, and the rapid evolution of cloud computing. The 2010s saw the emergence of artificial intelligence, machine learning, and the Internet of Things (IoT), reshaping industries and daily life. By 2023, we find ourselves standing on the precipice of a new era, characterized by advancements in quantum computing, 5G connectivity, and the integration of technology into every facet of our existence. From the dot-com boom to the era of smart cities and autonomous vehicles, the journey of technology has been an awe-inspiring saga of innovation, connectivity, and boundless possibilities. Here's to the relentless spirit of progress propelling us into the future!</p>
         </article>
     </div>
 </body>
