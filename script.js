@@ -152,10 +152,12 @@ animate();
 });
 
     const phrases = [
-        "Web Developer  ",
-        "Designer  ",
-        "Problem Solver  ",
-        "Creative Thinker  "
+        "AI Enthusiast  ",
+        "AI Enthusiast  ",
+        "Creative Thinker  ",
+        "Creative Thinker  ",
+        "Problem Solver ",
+        "Problem Solver "
     ];
 
     let phraseIndex = 0;
@@ -206,4 +208,80 @@ animate();
     document.addEventListener("DOMContentLoaded", typeWriter);
 
 
+    /* ---------------------------- */
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const glowbugsContainer = document.getElementById('glowbugs-container');
+        const chatbotGlowbugsContainer = document.getElementById('chatbot-glowbugs-container');
+        const numGlowbugs = 100;
+        const numChatbotGlowbugs = 40;
     
+        function getChatbotPosition() {
+            const chatbot = document.querySelector('.chatbase-bubble');
+            if (chatbot) {
+                const rect = chatbot.getBoundingClientRect();
+                return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+            }
+            return { x: window.innerWidth - 50, y: window.innerHeight - 50 };
+        }
+    
+        function createGlowbug(container, isChatbotFocused = false) {
+            const glowbug = document.createElement('div');
+            glowbug.className = 'glowbug';
+            const size = 3 + Math.random() * 5;
+            glowbug.style.width = `${size}px`;
+            glowbug.style.height = `${size}px`;
+            
+            const hue = isChatbotFocused ? 120 : 60;
+            const lightness = 50 + Math.random() * 20;
+            glowbug.style.backgroundColor = `hsl(${hue}, 100%, ${lightness}%)`;
+            glowbug.style.boxShadow = `0 0 ${size * 2}px ${size / 2}px hsla(${hue}, 100%, ${lightness}%, 0.3)`;
+            
+            container.appendChild(glowbug);
+            return glowbug;
+        }
+    
+        function moveGlowbug(glowbug, container) {
+            const isChatbotFocused = container === chatbotGlowbugsContainer;
+            let x, y;
+    
+            if (isChatbotFocused) {
+                const chatbotPos = getChatbotPosition();
+                x = chatbotPos.x + (Math.random() - 0.5) * 300;
+                y = chatbotPos.y + (Math.random() - 0.5) * 300;
+            } else {
+                x = Math.random() * window.innerWidth;
+                y = Math.random() * window.innerHeight;
+            }
+    
+            // Ensure the glowbugs stay within the viewport
+            x = Math.max(0, Math.min(x, window.innerWidth));
+            y = Math.max(0, Math.min(y, window.innerHeight));
+    
+            glowbug.style.transform = `translate(${x}px, ${y}px)`;
+            glowbug.style.opacity = 1;
+            glowbug.style.transition = `transform 15s ease-in-out, opacity 1s`;
+    
+            setTimeout(() => moveGlowbug(glowbug, container), 8000 + Math.random() * 5000);
+        }
+    
+        // Create and move regular glowbugs
+        for (let i = 0; i < numGlowbugs; i++) {
+            const glowbug = createGlowbug(glowbugsContainer);
+            moveGlowbug(glowbug, glowbugsContainer);
+        }
+    
+        // Create and move chatbot-focused glowbugs
+        for (let i = 0; i < numChatbotGlowbugs; i++) {
+            const glowbug = createGlowbug(chatbotGlowbugsContainer, true);
+            moveGlowbug(glowbug, chatbotGlowbugsContainer);
+        }
+    
+        // Reposition glowbugs on window resize
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.glowbug').forEach(glowbug => {
+                const container = glowbug.parentElement;
+                moveGlowbug(glowbug, container);
+            });
+        });
+    });
