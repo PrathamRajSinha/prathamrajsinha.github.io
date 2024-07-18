@@ -213,7 +213,7 @@ animate();
     document.addEventListener('DOMContentLoaded', function() {
         const glowbugsContainer = document.getElementById('glowbugs-container');
         const chatbotGlowbugsContainer = document.getElementById('chatbot-glowbugs-container');
-        const numGlowbugs = 100;
+        const numGlowbugs = 90;
         const numChatbotGlowbugs = 40;
     
         function getChatbotPosition() {
