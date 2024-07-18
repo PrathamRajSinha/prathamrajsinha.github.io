@@ -121,6 +121,9 @@ body {
             transform: translateY(0);
             will-change: transform;
         }
+        #home h1{
+            size: 100;
+        }
         #home .parallax-bg {
             background-image: url('images/background.jpeg');
         }
@@ -168,8 +171,9 @@ body {
             margin: 10px 0;
         }
         #resume-section a {
-            color: #ff5c5c;
+            color: #000000;
             text-decoration: none;
+
         }
         #resume-section a:hover {
             color: #fff94d;
@@ -337,8 +341,6 @@ body {
         .android-body {
             width: 100%;
             height: 100%;
-            fill: #a0e57c;
-            filter: drop-shadow(0 0 5px #a0e57c);
         }
         
         .wing {
@@ -394,8 +396,10 @@ body {
         }
 
         #typewriter {
-            font-size: 1.5em;
+            font-size: 2.5em;
             min-height: 1.5em;
+            color: #ff6868;
+            font-family: 'Times New Roman', Times, serif;
         }
         .cursor {
             border-right: 2px solid #000;
@@ -449,4 +453,101 @@ body {
             100% {
                 transform: translateY(0px);
             }
+        }
+
+
+        /* ------------------------------------ */
+
+        #resume-section {
+            background-color: #f9f9f900;
+            padding: 50px 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info p {
+            margin: 0;
+        }
+        
+        .resume-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .resume-item {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .resume-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resume-item h3 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .resume-item i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        
+        .resume-item ul {
+            padding-left: 20px;
+        }
+        
+        .resume-item li {
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-info p {
+                margin-bottom: 10px;
+            }
+        }
+
+
+        /* -------------------------- */
+        #glowbugs-container, #chatbot-glowbugs-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        
+
+        
+        /* Ensure the chatbot widget doesn't overlap with glowbugs */
+        #chatbase-bubble-window, .chatbase-bubble {
+            z-index: 10000 !important;
+        }
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .glowbug {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 15s ease-in-out;
         }
