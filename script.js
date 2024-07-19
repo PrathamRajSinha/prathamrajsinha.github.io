@@ -290,6 +290,7 @@ animate();
 
     /* ------ */
     document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
         const loadingText = document.getElementById('loading-text');
         const text = "Pratham's Website is Loading...";
         let index = 0;
@@ -302,15 +303,27 @@ animate();
 
         animateText();
 
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
+        const startTime = Date.now();
+        const minLoadTime = 4000; // 4 seconds in milliseconds
 
-            setTimeout(function() {
+        function hidePreloader() {
+            const elapsedTime = Date.now() - startTime;
+            if (elapsedTime >= minLoadTime) {
                 preloader.style.opacity = '0';
-                
-                setTimeout(function() {
+                setTimeout(() => {
                     preloader.style.display = 'none';
                 }, 1000); // Wait for fade out to complete before hiding
-            }, 2000); // Delay start of fade out by 2 seconds
-        });
+            } else {
+                // Wait for the remaining time
+                setTimeout(hidePreloader, minLoadTime - elapsedTime);
+            }
+        }
+
+        // Use the load event to ensure all resources are loaded
+        window.addEventListener('load', hidePreloader);
+
+        // Fallback in case the load event doesn't fire
+        setTimeout(hidePreloader, minLoadTime);
+
+        // Your existing code here
     });
