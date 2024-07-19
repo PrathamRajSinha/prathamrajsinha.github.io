@@ -551,3 +551,47 @@ body {
             pointer-events: none;
             transition: transform 5s ease-in-out;
         }
+
+        /* ------------------------- */
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff9393;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .loader {
+            border: 8px solid #ffff7e;
+            border-top: 8px solid #9370DB; /* Lavender color */
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loading-text {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #9370DB; /* Lavender color */
+            font-family: Arial, sans-serif;
+            opacity: 1;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
