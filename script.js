@@ -213,7 +213,7 @@ animate();
     document.addEventListener('DOMContentLoaded', function() {
         const glowbugsContainer = document.getElementById('glowbugs-container');
         const chatbotGlowbugsContainer = document.getElementById('chatbot-glowbugs-container');
-        const numGlowbugs = 90;
+        const numGlowbugs = 100;
         const numChatbotGlowbugs = 40;
     
         function getChatbotPosition() {
@@ -255,14 +255,14 @@ animate();
             }
     
             // Ensure the glowbugs stay within the viewport
-            x = Math.max(0, Math.min(x, window.innerWidth));
-            y = Math.max(0, Math.min(y, window.innerHeight));
+            x = Math.max(0, Math.min(x, window.innerWidth + Math.random()*window.innerHeight));
+            y = Math.max(0, Math.min(y, window.innerHeight + Math.random()*window.innerWidth));
     
             glowbug.style.transform = `translate(${x}px, ${y}px)`;
             glowbug.style.opacity = 1;
             glowbug.style.transition = `transform 15s ease-in-out, opacity 1s`;
     
-            setTimeout(() => moveGlowbug(glowbug, container), 8000 + Math.random() * 5000);
+            setTimeout(() => moveGlowbug(glowbug, container), 0 + Math.random() * 8000);
         }
     
         // Create and move regular glowbugs
