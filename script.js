@@ -313,6 +313,4 @@ animate();
                 }, 1000); // Wait for fade out to complete before hiding
             }, 2000); // Delay start of fade out by 2 seconds
         });
-
-        // Your existing code here
     });
