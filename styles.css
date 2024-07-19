@@ -549,5 +549,5 @@ body {
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
-            transition: transform 15s ease-in-out;
+            transition: transform 5s ease-in-out;
         }
