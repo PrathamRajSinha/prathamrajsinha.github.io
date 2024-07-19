@@ -325,5 +325,4 @@ animate();
         // Fallback in case the load event doesn't fire
         setTimeout(hidePreloader, minLoadTime);
 
-        // Your existing code here
     });
