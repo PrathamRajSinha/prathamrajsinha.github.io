@@ -247,22 +247,24 @@ animate();
     
             if (isChatbotFocused) {
                 const chatbotPos = getChatbotPosition();
-                x = chatbotPos.x + (Math.random() - 0.5) * 300;
-                y = chatbotPos.y + (Math.random() - 0.5) * 300;
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 50 + Math.random() * 250; // Distribute within a 50-300px radius
+                x = chatbotPos.x + Math.cos(angle) * distance;
+                y = chatbotPos.y + Math.sin(angle) * distance;
             } else {
                 x = Math.random() * window.innerWidth;
                 y = Math.random() * window.innerHeight;
             }
     
             // Ensure the glowbugs stay within the viewport
-            x = Math.max(0, Math.min(x, window.innerWidth + Math.random()*window.innerHeight));
-            y = Math.max(0, Math.min(y, window.innerHeight + Math.random()*window.innerWidth));
+            x = Math.max(0, Math.min(x, window.innerWidth));
+            y = Math.max(0, Math.min(y, window.innerHeight));
     
             glowbug.style.transform = `translate(${x}px, ${y}px)`;
             glowbug.style.opacity = 1;
-            glowbug.style.transition = `transform 15s ease-in-out, opacity 1s`;
+            glowbug.style.transition = `transform ${10 + Math.random() * 10}s ease-in-out, opacity 1s`;
     
-            setTimeout(() => moveGlowbug(glowbug, container), 0 + Math.random() * 8000);
+            setTimeout(() => moveGlowbug(glowbug, container), 5000 + Math.random() * 10000);
         }
     
         // Create and move regular glowbugs
