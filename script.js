@@ -287,3 +287,32 @@ animate();
             });
         });
     });
+
+    /* ------ */
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingText = document.getElementById('loading-text');
+        const text = "Pratham's Website is Loading...";
+        let index = 0;
+
+        function animateText() {
+            loadingText.textContent = text.slice(0, index);
+            index = (index + 1) % (text.length + 1);
+            setTimeout(animateText, 100);
+        }
+
+        animateText();
+
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+
+            setTimeout(function() {
+                preloader.style.opacity = '0';
+                
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 1000); // Wait for fade out to complete before hiding
+            }, 2000); // Delay start of fade out by 2 seconds
+        });
+
+        // Your existing code here
+    });
