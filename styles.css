@@ -176,7 +176,7 @@ body {
 
         }
         #resume-section a:hover {
-            color: #fff94d;
+            color: #ff5a5a;
             text-decoration: none;
         }
         #resume-section ul {
@@ -189,9 +189,10 @@ body {
             border: 1px solid #000000;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.089);
             background: #fff;
             transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 3;
         }
         .resume-item:hover {
             transform: translateY(-10px);
@@ -214,7 +215,14 @@ body {
             margin: 20px;
             border: #000000;
             border: 1px;
+            z-index: 3;
         }
+        #projects .flip-card {
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+        }
+        
         #projects .flip-card-inner {
             position: relative;
             width: 100%;
@@ -222,6 +230,48 @@ body {
             text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
+        }
+        
+        #projects .flip-card-front,
+        #projects .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #projects .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        #projects .flip-card-front .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+        }
+        
+        #projects .flip-card-front .overlay h3 {
+            color: white;
+            margin: 0;
+        }
+        
+        #projects .flip-card-back {
+            background-color: #f1f1f1;
+            transform: rotateY(180deg);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        #projects .flip-card-back p {
+            margin: 0;
         }
         #projects .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
@@ -531,7 +581,7 @@ body {
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9998;
+            z-index: 1;
         }
         
 
@@ -546,7 +596,7 @@ body {
         }
         
         .glowbug {
-            position: absolute;
+            position: relative;
             border-radius: 50%;
             pointer-events: none;
             transition: transform 5s ease-in-out;
@@ -594,4 +644,26 @@ body {
         @keyframes fadeInOut {
             0%, 100% { opacity: 0; }
             50% { opacity: 1; }
+        }
+
+        /* ------------- */
+        .download-resume-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 20px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-resume-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .download-resume-btn i {
+            margin-right: 10px;
         }
