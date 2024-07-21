@@ -448,7 +448,7 @@ body {
         #typewriter {
             font-size: 2.5em;
             min-height: 1.5em;
-            color: #ff6868;
+            color: #ffef5b;
             font-family: 'Times New Roman', Times, serif;
         }
         .cursor {
@@ -488,9 +488,10 @@ body {
         .parallax-content .name {
             font-size: 4rem; /* or 5rem, or whatever size you prefer */
             font-weight: bold;
-            color: #ffc0c0;
+            color: #fffea8;
             text-shadow: #000;
             animation: float2 4s ease-in-out infinite;
+            text-shadow: #000;
 
         }
         @keyframes float2 {
@@ -667,3 +668,53 @@ body {
         .download-resume-btn i {
             margin-right: 10px;
         }
+
+        /* ----------------------------------- */
+        .chat-container {
+            position: fixed;
+            bottom: 24px;  /* Increased from 20px */
+            right: 24px;   /* Increased from 20px */
+            z-index: 1000;
+          }
+        
+          .chat-container::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            bottom: -5px;  /* Position relative to the bottom of the container */
+            right: -5px;   /* Position relative to the right of the container */
+            background-color: rgba(238, 255, 0, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+          }
+        
+          @keyframes pulse {
+            0% {
+              transform: scale(2.5);
+              box-shadow: 0 0 0 0 rgb(245, 255, 105);
+            }
+            
+            70% {
+              transform: scale(1);
+              box-shadow: 0 0 0 10px rgba(246, 255, 0, 0);
+            }
+            
+            100% {
+              transform: scale(2.5);
+              box-shadow: 0 0 0 0 rgba(246, 255, 0, 0);
+            }
+          }
+        
+          /* Adjust positioning for smaller screens */
+          @media (max-width: 768px) {
+            .chat-container {
+              bottom: 16px;
+              right: 16px;
+            }
+        
+            .chat-container::before {
+              width: 50px;
+              height: 50px;
+            }
+          }
