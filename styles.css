@@ -141,6 +141,7 @@ body {
             transition: transform 0.1s;
         }
         #heading, #links, #heading_projects {
+            color: #f1f1f1;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         #heading, #heading_projects {
@@ -299,6 +300,9 @@ body {
             background: #333;
             color: #fff;
         }
+        #contact h2{
+            color: #f1f1f1;
+        }
         #contact a {
             color: #4CAF50;
             text-decoration: none;
@@ -311,7 +315,7 @@ body {
         #more-about-me h2 {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #333;
+            color: #ffffff;
         }
         #more-about-me .instagram-reel {
             display: inline-block;
@@ -329,15 +333,15 @@ body {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
         #more-about-me .instagram-reel img {
-            width: 100%;
+            width: auto;
             height: auto;
         }
+        
         #more-about-me .extra-curriculars {
             margin-top: 50px;
         }
-        #more-about-me .extra-curriculars h3 {
-            font-size: 24px;
-            color: #333;
+        #more-about-me .extra-curriculars h2 {
+            color: #ffffff;
         }
         #more-about-me .extra-curriculars ul {
             list-style: none;
@@ -354,7 +358,7 @@ body {
         }
         #more-about-me .extra-curriculars ul li:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -718,3 +722,121 @@ body {
               height: 50px;
             }
           }
+
+
+          /* ---------------------------------- */
+          @font-face {
+            font-family: 'OutrunFuture';
+            src: url('fonts/OutrunFuture.woff2') format('woff2'),
+                 url('fonts/OutrunFuture.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+          }
+          
+          h1, h2 {
+            font-family: 'OutrunFuture', sans-serif;
+            color: #00ffff; /* Neon cyan color */
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff, 0 0 20px #00ffff;
+          }
+
+          @keyframes neon-glow {
+            0% {
+              text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff, 0 0 20px #00ffff;
+            }
+            50% {
+              text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+            }
+            100% {
+              text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff, 0 0 20px #00ffff;
+            }
+          }
+          
+          h1, h2 {
+            animation: neon-glow 2s ease-in-out infinite alternate;
+          }
+
+          h1, h2 {
+            font-family: 'OutrunFuture', 'Arial', sans-serif;
+          }
+
+          /*---------------------------------------------------*/
+          /* Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #00ffff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00cccc;
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #00ffff #0a0a0a;
+  }
+  #scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: linear-gradient(to right, #00ffff, #ff00ff);
+    z-index: 9999;
+    transition: width 0.2s ease-out;
+  }
+  #scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00ffff;
+    color: #0a0a0a;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 0 10px #00ffff;
+  }
+  
+  #scroll-top:hover {
+    transform: scale(1.1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+
+  /*_____________________________*/
+
+        .instagram-reels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 100%;
+        }
+        .instagram-reel {
+            flex: 1 1 300px;
+            max-width: 540px;
+            min-width: 300px;
+        }
+        .instagram-reel iframe {
+            width: 100% !important;
+            min-width: 100% !important;
+        }
+
