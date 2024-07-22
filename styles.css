@@ -834,7 +834,7 @@ body {
         }
         .instagram-reel {
             flex: 1 1 300px;
-            max-width: 540px;
+            max-width: 300px;
             min-width: 300px;
             z-index: 100;
         }
