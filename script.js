@@ -190,11 +190,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Typewriter effect
     const phrases = [
         "AI Enthusiast  ",
-        "AI Enthusiast  ",
+        " AI Enthusiast  ",
         "Creative Thinker  ",
-        "Creative Thinker  ",
+        " Creative Thinker  ",
         "Problem Solver ",
-        "Problem Solver "
+        " Problem Solver "
     ];
 
     let phraseIndex = 0;
@@ -321,3 +321,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+/* ------------------------------------------ */
+window.addEventListener('scroll', function() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('scroll-progress').style.width = scrolled + '%';
+  });
+  window.addEventListener('scroll', function() {
+    const scrollTop = document.getElementById('scroll-top');
+    if (window.pageYOffset > 300) {
+      scrollTop.style.opacity = '1';
+    } else {
+      scrollTop.style.opacity = '0';
+    }
+  });
+  
+  document.getElementById('scroll-top').addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
