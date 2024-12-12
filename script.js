@@ -18,12 +18,10 @@ function createStarField() {
         const star = document.createElement('div');
         star.className = 'star initial-zoom';
         
-        // Random size between 1-4px with some stars being larger
         const size = Math.random() * 3 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         
-        // Initial position
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.random() * Math.PI * 2;
         const radius = Math.random() * 1000;
@@ -35,11 +33,10 @@ function createStarField() {
         star.style.left = `${x}%`;
         star.style.top = `${y}%`;
         star.dataset.z = z;
+        star.dataset.originalZ = z;
         
-        // Set initial opacity and brightness
         const initialOpacity = 0.3 + Math.random() * 0.7;
         star.style.setProperty('--initial-opacity', initialOpacity);
-        star.style.filter = `blur(0.2px) brightness(${1 + Math.random()})`;
         
         starfield.appendChild(star);
         stars.push({
@@ -58,7 +55,6 @@ function createStarField() {
             star.element.style.transform = `translateZ(${star.element.dataset.z}px)`;
         });
         
-        // Start independent twinkling
         requestAnimationFrame(function animate() {
             stars.forEach(star => {
                 if (!star.element.classList.contains('scroll-zoom')) {
@@ -73,29 +69,26 @@ function createStarField() {
 
     // Scroll handling
     let lastScrollY = window.pageYOffset;
-    let isScrolling = false;
-    let scrollTimeout;
-    let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-    function updateMaxScroll() {
-        maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    }
-
-    window.addEventListener('resize', updateMaxScroll);
+    let scrollDirection = 1;
 
     window.addEventListener('scroll', () => {
         const currentScrollY = window.pageYOffset;
         const scrollDelta = currentScrollY - lastScrollY;
         
+        // Update scroll direction only on significant scroll
+        if (Math.abs(scrollDelta) > 1) {
+            scrollDirection = Math.sign(scrollDelta);
+        }
+        
         stars.forEach(star => {
             const currentZ = parseFloat(star.element.dataset.z);
             const zoomFactor = 0.5;
-            let newZ = currentZ + scrollDelta * zoomFactor;
+            let newZ = currentZ + (scrollDelta * zoomFactor);
             
-            // Reset position with continuous flow
-            if (newZ > 2000) {
+            // Reset position while maintaining direction
+            if (scrollDirection > 0 && newZ > 2000) {
                 newZ = -1000;
-            } else if (newZ < -1000) {
+            } else if (scrollDirection < 0 && newZ < -1000) {
                 newZ = 2000;
             }
             
@@ -104,22 +97,6 @@ function createStarField() {
         });
 
         lastScrollY = currentScrollY;
-
-        if (!isScrolling) {
-            stars.forEach(star => {
-                star.element.classList.add('scroll-zoom');
-            });
-        }
-
-        isScrolling = true;
-        clearTimeout(scrollTimeout);
-
-        scrollTimeout = setTimeout(() => {
-            isScrolling = false;
-            stars.forEach(star => {
-                star.element.classList.remove('scroll-zoom');
-            });
-        }, 150);
     });
 }
 
