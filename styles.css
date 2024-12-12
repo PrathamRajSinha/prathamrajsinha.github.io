@@ -36,7 +36,6 @@ body {
         0 0 3px #fff,
         0 0 6px #fff,
         0 0 12px rgba(255, 255, 255, 0.3);
-    filter: blur(0.2px);
 }
 
 .star.initial-zoom {
