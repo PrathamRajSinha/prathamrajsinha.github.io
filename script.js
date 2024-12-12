@@ -1,346 +1,342 @@
-window.addEventListener('scroll', function() {
-    var parallaxSections = document.querySelectorAll('.parallax-section');
-    var scrollPosition = window.pageYOffset;
-
-    parallaxSections.forEach(function(section) {
-        var sectionTop = section.offsetTop;
-        var sectionHeight = section.offsetHeight;
-        var images = section.querySelectorAll('img');
-
-        if (scrollPosition > sectionTop - window.innerHeight && scrollPosition < sectionTop + sectionHeight) {
-            images.forEach(function(img) {
-                var speed = img.getAttribute('data-speed');
-                var yPos = (scrollPosition - sectionTop) * speed;
-                img.style.transform = 'translateY(' + yPos + 'px)';
-            });
-        }
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    createStarField();
+    initCursor();
+    initScrollAnimations();
+    initTypewriter();
+    initNavigation();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const firefliesContainer = document.getElementById('fireflies-container');
-    const androidFairy = document.getElementById('android-fairy');
-    const numFireflies = 50;
-    const fireflies = [];
-    let isFairyformed = false;
-    let isGathering = false;
-    let gatherX = 10, gatherY = 10;
-    let fairyX = 10, fairyY = 10;
+function createStarField() {
+    const starfield = document.createElement('div');
+    starfield.className = 'starfield';
+    document.body.appendChild(starfield);
 
-    // Create custom cursor
-    const customCursor = document.createElement('div');
-    customCursor.classList.add('custom-cursor');
-    document.body.appendChild(customCursor);
+    const numStars = 800;
+    const stars = [];
 
-    function createFirefly() {
-        const firefly = document.createElement('div');
-        firefly.classList.add('firefly');
-        const size = Math.random() * 4 + 2;
-        firefly.style.width = `${size}px`;
-        firefly.style.height = `${size}px`;
-        firefly.style.left = `${Math.random() * 100}%`;
-        firefly.style.top = `${Math.random() * 100}%`;
-        firefliesContainer.appendChild(firefly);
-        console.log('Firefly created:', firefly);
-        return {
-            element: firefly,
-            x: parseFloat(firefly.style.left),
-            y: parseFloat(firefly.style.top),
-            vx: 0,
-            vy: 0
-        };
-    }
-
-    function moveFirefly(firefly, targetX, targetY) {
-        const dx = targetX - firefly.x;
-        const dy = targetY - firefly.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 0.1) {
-            return true; // Firefly has reached the target
-        }
-
-        const speed = isGathering ? 0.1 : 0.1;
-        firefly.vx += dx * speed;
-        firefly.vy += dy * speed;
-
-        // Apply velocity with damping
-        firefly.x += firefly.vx * 0.1;
-        firefly.y += firefly.vy * 0.1;
-        firefly.vx *= 0.7;
-        firefly.vy *= 0.7;
-
-        // Keep fireflies within bounds
-        firefly.x = Math.max(0, Math.min(100, firefly.x));
-        firefly.y = Math.max(0, Math.min(100, firefly.y));
-
-        firefly.element.style.left = `${firefly.x}%`;
-        firefly.element.style.top = `${firefly.y}%`;
-
-        return false; // Firefly is still moving
-    }
-
-    function blinkFirefly(firefly) {
-        if (!isFairyformed) {
-            firefly.element.style.opacity = Math.random() * 0.5 + 0.5;
-        }
-    }
-
-    // Create fireflies
-    for (let i = 0; i < numFireflies; i++) {
-        fireflies.push(createFirefly());
-    }
-
-    // Animate fireflies and update cursor
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX / window.innerWidth * 100;
-        mouseY = e.clientY / window.innerHeight * 100;
-
-        // Update custom cursor position
-        customCursor.style.left = `${e.clientX}px`;
-        customCursor.style.top = `${e.clientY}px`;
-    });
-
-    function transformToFairy() {
-        isFairyformed = true;
-        androidFairy.style.display = 'block';
-        androidFairy.style.opacity = 1;
-        fireflies.forEach(firefly => {
-            firefly.element.classList.add('hidden');
+    for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star initial-zoom';
+        
+        // Random size between 1-4px with some stars being larger
+        const size = Math.random() * 3 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // Initial position
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 1000;
+        
+        const x = 50 + radius * Math.cos(theta) * Math.sin(phi);
+        const y = 50 + radius * Math.sin(theta) * Math.sin(phi);
+        const z = radius * Math.cos(phi);
+        
+        star.style.left = `${x}%`;
+        star.style.top = `${y}%`;
+        star.dataset.z = z;
+        
+        // Set initial opacity and brightness
+        const initialOpacity = 0.3 + Math.random() * 0.7;
+        star.style.setProperty('--initial-opacity', initialOpacity);
+        star.style.filter = `blur(0.2px) brightness(${1 + Math.random()})`;
+        
+        starfield.appendChild(star);
+        stars.push({
+            element: star,
+            baseOpacity: initialOpacity,
+            twinkleSpeed: 0.01 + Math.random() * 0.02,
+            twinkleTime: Math.random() * Math.PI * 2,
+            twinkleRange: 0.4 + Math.random() * 0.6
         });
-        fairyX = gatherX;
-        fairyY = gatherY;
-        androidFairy.style.left = `${fairyX}%`;
-        androidFairy.style.top = `${fairyY}%`;
     }
 
-    function moveFairyTowardsMouse() {
-        const dx = mouseX - fairyX;
-        const dy = mouseY - fairyY;
-        fairyX += dx * 0.08;
-        fairyY += dy * 0.08;
-        androidFairy.style.left = `${fairyX}%`;
-        androidFairy.style.top = `${fairyY}%`;
-    }
-
-    function animate() {
-        if (!isFairyformed) {
-            let allFirefliesGathered = true;
-            fireflies.forEach(firefly => {
-                if (!moveFirefly(firefly, gatherX, gatherY)) {
-                    allFirefliesGathered = false;
+    // Initial animation sequence
+    setTimeout(() => {
+        stars.forEach(star => {
+            star.element.classList.remove('initial-zoom');
+            star.element.style.transform = `translateZ(${star.element.dataset.z}px)`;
+        });
+        
+        // Start independent twinkling
+        requestAnimationFrame(function animate() {
+            stars.forEach(star => {
+                if (!star.element.classList.contains('scroll-zoom')) {
+                    star.twinkleTime += star.twinkleSpeed;
+                    const opacity = star.baseOpacity + Math.sin(star.twinkleTime) * star.twinkleRange;
+                    star.element.style.opacity = Math.max(0.1, Math.min(1, opacity));
                 }
-                blinkFirefly(firefly);
             });
+            requestAnimationFrame(animate);
+        });
+    }, 3000);
 
-            if (allFirefliesGathered) {
-                transformToFairy();
+    // Scroll handling
+    let lastScrollY = window.pageYOffset;
+    let isScrolling = false;
+    let scrollTimeout;
+    let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+    function updateMaxScroll() {
+        maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    }
+
+    window.addEventListener('resize', updateMaxScroll);
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.pageYOffset;
+        const scrollDelta = currentScrollY - lastScrollY;
+        
+        stars.forEach(star => {
+            const currentZ = parseFloat(star.element.dataset.z);
+            const zoomFactor = 0.5;
+            let newZ = currentZ + scrollDelta * zoomFactor;
+            
+            // Reset position with continuous flow
+            if (newZ > 2000) {
+                newZ = -1000;
+            } else if (newZ < -1000) {
+                newZ = 2000;
             }
-        } else {
-            moveFairyTowardsMouse();
+            
+            star.element.dataset.z = newZ;
+            star.element.style.transform = `translateZ(${newZ}px)`;
+        });
+
+        lastScrollY = currentScrollY;
+
+        if (!isScrolling) {
+            stars.forEach(star => {
+                star.element.classList.add('scroll-zoom');
+            });
         }
-        requestAnimationFrame(animate);
+
+        isScrolling = true;
+        clearTimeout(scrollTimeout);
+
+        scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+            stars.forEach(star => {
+                star.element.classList.remove('scroll-zoom');
+            });
+        }, 150);
+    });
+}
+
+// Update only the cursor-related JavaScript
+function initCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    const rocket = document.createElement('div');
+    rocket.className = 'cursor-rocket';
+    cursor.appendChild(rocket);
+    document.body.appendChild(cursor);
+
+    let trails = [];
+    const maxTrails = 5;
+    let lastX = 0;
+    let lastY = 0;
+    let currentAngle = 0;
+    let targetAngle = 0;
+
+    function updateCursor(e) {
+        // Smooth position
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        // Calculate angle
+        const dx = x - lastX;
+        const dy = y - lastY;
+        
+        if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+            targetAngle = Math.atan2(dy, dx) + Math.PI / 4;
+        }
+        
+        // Smooth rotation
+        const angleDiff = targetAngle - currentAngle;
+        currentAngle += angleDiff * 0.15;
+
+        // Update cursor
+        cursor.style.left = `${x - cursor.offsetWidth / 2}px`;
+        cursor.style.top = `${y - cursor.offsetHeight / 2}px`;
+        cursor.style.transform = `rotate(${currentAngle}rad)`;
+
+        // Create trail with interpolated positions
+        if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+            createTrail(x, y, currentAngle);
+        }
+
+        lastX = x;
+        lastY = y;
     }
 
-    // Start firefly animation
-    function startFireflyAnimation() {
-        isGathering = true;
-        gatherX = 62;
-        gatherY = 15;
+    function createTrail(x, y, angle) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        
+        trail.style.left = `${x - 6}px`;
+        trail.style.top = `${y - 6}px`;
+        trail.style.transform = `rotate(${angle}rad)`;
+        
+        document.body.appendChild(trail);
+        trails.push(trail);
+
+        if (trails.length > maxTrails) {
+            const oldTrail = trails.shift();
+            oldTrail.style.opacity = '0';
+            setTimeout(() => oldTrail.remove(), 300);
+        }
+
+        setTimeout(() => {
+            trail.style.opacity = '0';
+            setTimeout(() => trail.remove(), 300);
+            trails = trails.filter(t => t !== trail);
+        }, 200);
     }
 
-    // Preloader
-    const preloader = document.getElementById('preloader');
-    const loadingText = document.getElementById('loading-text');
-    const text = "Pratham's Website is Loading...";
-    let index = 0;
+    // Use RAF for smoother animation
+    let rafId;
+    let mouseX = 0;
+    let mouseY = 0;
 
-    function animateText() {
-        loadingText.textContent = text.slice(0, index);
-        index = (index + 1) % (text.length + 1);
-        setTimeout(animateText, 100);
-    }
-
-    animateText();
-
-    const startTime = Date.now();
-    const minLoadTime = 3200; // 3 seconds in milliseconds
-
-    function hidePreloader() {
-        const elapsedTime = Date.now() - startTime;
-        if (elapsedTime >= minLoadTime) {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-                startFireflyAnimation(); // Start firefly animation here
-                animate(); // Start the animation loop
-            }, 1000); // Wait for fade out to complete before hiding and starting animation
-        } else {
-            setTimeout(hidePreloader, minLoadTime - elapsedTime);
+    function updateMousePosition(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!rafId) {
+            rafId = requestAnimationFrame(updateFrame);
         }
     }
 
-    // Use the load event to ensure all resources are loaded
-    window.addEventListener('load', hidePreloader);
+    function updateFrame() {
+        updateCursor({ clientX: mouseX, clientY: mouseY });
+        rafId = null;
+    }
 
-    // Fallback in case the load event doesn't fire
-    setTimeout(hidePreloader, minLoadTime);
+    document.addEventListener('mousemove', updateMousePosition);
+}
 
-    // Typewriter effect
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.section-title, .grid-item, .hero-content').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+function initTypewriter() {
     const phrases = [
         "AI Enthusiast  ",
-        " AI Enthusiast  ",
         "Creative Thinker  ",
-        " Creative Thinker  ",
-        "Problem Solver ",
-        " Problem Solver "
+        "Problem Solver  "
     ];
-
     let phraseIndex = 0;
     let letterIndex = 0;
     let currentPhrase = "";
     let isDeleting = false;
-    let isEnd = false;
+    const typewriterElement = document.getElementById('typewriter');
 
     function typeWriter() {
-        isEnd = false;
-        const typewriterElement = document.getElementById("typewriter");
+        const phrase = phrases[phraseIndex];
         
-        if (phraseIndex === phrases.length) {
-            phraseIndex = 0;
-        }
-        
-        if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
-            currentPhrase = phrases[phraseIndex].substring(0, letterIndex);
-            letterIndex++;
-        } else if (isDeleting && letterIndex > 0) {
-            currentPhrase = phrases[phraseIndex].substring(0, letterIndex);
+        if (isDeleting) {
+            currentPhrase = phrase.substring(0, letterIndex - 1);
             letterIndex--;
         } else {
-            isDeleting = !isDeleting;
-            phraseIndex++;
-            if (phraseIndex === phrases.length) {
-                phraseIndex = 0;
-            }
-            letterIndex = isDeleting ? phrases[phraseIndex].length : 0;
+            currentPhrase = phrase.substring(0, letterIndex + 1);
+            letterIndex++;
         }
-        
-        typewriterElement.innerHTML = currentPhrase;
-        typewriterElement.classList.add("cursor");
-        
-        const typingSpeed = isDeleting ? 30 : 100;
-        const pauseTime = isDeleting ? 500 : 900;
-        
-        if (!isDeleting && letterIndex === phrases[phraseIndex].length) {
-            setTimeout(typeWriter, pauseTime);
+
+        if (typewriterElement) {
+            typewriterElement.textContent = currentPhrase;
+        }
+
+        let typeSpeed = isDeleting ? 100 : 200;
+
+        if (!isDeleting && letterIndex === phrase.length) {
+            typeSpeed = 2000;
+            isDeleting = true;
         } else if (isDeleting && letterIndex === 0) {
-            typewriterElement.classList.remove("cursor");
-            setTimeout(typeWriter, 500);
-        } else {
-            setTimeout(typeWriter, typingSpeed);
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500;
         }
+
+        setTimeout(typeWriter, typeSpeed);
     }
 
     typeWriter();
+}
 
-    // Glowbugs
-    const glowbugsContainer = document.getElementById('glowbugs-container');
-    const chatbotGlowbugsContainer = document.getElementById('chatbot-glowbugs-container');
-    const numGlowbugs = 100;
-    const numChatbotGlowbugs = 40;
-
-    function getChatbotPosition() {
-        const chatbot = document.querySelector('.chatbase-bubble');
-        if (chatbot) {
-            const rect = chatbot.getBoundingClientRect();
-            return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-        }
-        return { x: window.innerWidth - 50, y: window.innerHeight - 50 };
-    }
-
-    function createGlowbug(container, isChatbotFocused = false) {
-        const glowbug = document.createElement('div');
-        glowbug.className = 'glowbug';
-        const size = 3 + Math.random() * 5;
-        glowbug.style.width = `${size}px`;
-        glowbug.style.height = `${size}px`;
+function initNavigation() {
+    let lastScrollPosition = window.pageYOffset;
+    const nav = document.querySelector('.main-nav');
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollPosition = window.pageYOffset;
         
-        const hue = isChatbotFocused ? 120 : 60;
-        const lightness = 50 + Math.random() * 20;
-        glowbug.style.backgroundColor = `hsl(${hue}, 100%, ${lightness}%)`;
-        glowbug.style.boxShadow = `0 0 ${size * 2}px ${size / 2}px hsla(${hue}, 100%, ${lightness}%, 0.3)`;
-        
-        container.appendChild(glowbug);
-        return glowbug;
-    }
-
-    function moveGlowbug(glowbug, container) {
-        const isChatbotFocused = container === chatbotGlowbugsContainer;
-        let x, y;
-
-        if (isChatbotFocused) {
-            const chatbotPos = getChatbotPosition();
-            const angle = Math.random() * 2 * Math.PI;
-            const distance = 50 + Math.random() * 250; // Distribute within a 50-300px radius
-            x = chatbotPos.x + Math.cos(angle) * distance;
-            y = chatbotPos.y + Math.sin(angle) * distance;
+        if (currentScrollPosition > lastScrollPosition) {
+            nav.style.transform = 'translateY(-100%)';
         } else {
-            x = Math.random() * window.innerWidth;
-            y = Math.random() * window.innerHeight;
+            nav.style.transform = 'translateY(0)';
         }
+        
+        lastScrollPosition = currentScrollPosition;
+    });
 
-        // Ensure the glowbugs stay within the viewport
-        x = Math.max(0, Math.min(x, window.innerWidth));
-        y = Math.max(0, Math.min(y, window.innerHeight));
-
-        glowbug.style.transform = `translate(${x}px, ${y}px)`;
-        glowbug.style.opacity = 1;
-        glowbug.style.transition = `transform ${10 + Math.random() * 10}s ease-in-out, opacity 1s`;
-
-        setTimeout(() => moveGlowbug(glowbug, container), 5000 + Math.random() * 10000);
-    }
-
-    // Create and move regular glowbugs
-    for (let i = 0; i < numGlowbugs; i++) {
-        const glowbug = createGlowbug(glowbugsContainer);
-        moveGlowbug(glowbug, glowbugsContainer);
-    }
-
-    // Create and move chatbot-focused glowbugs
-    for (let i = 0; i < numChatbotGlowbugs; i++) {
-        const glowbug = createGlowbug(chatbotGlowbugsContainer, true);
-        moveGlowbug(glowbug, chatbotGlowbugsContainer);
-    }
-
-    // Reposition glowbugs on window resize
-    window.addEventListener('resize', () => {
-        document.querySelectorAll('.glowbug').forEach(glowbug => {
-            const container = glowbug.parentElement;
-            moveGlowbug(glowbug, container);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
     });
+}
+
+function throttle(func, limit) {
+    let inThrottle;
+    return function(e) {
+        if (!inThrottle) {
+            func(e);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    const starfield = document.querySelector('.starfield');
+    if (starfield) {
+        starfield.remove();
+    }
+    createStarField();
 });
 
-/* ------------------------------------------ */
-window.addEventListener('scroll', function() {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById('scroll-progress').style.width = scrolled + '%';
-  });
-  window.addEventListener('scroll', function() {
-    const scrollTop = document.getElementById('scroll-top');
-    if (window.pageYOffset > 300) {
-      scrollTop.style.opacity = '1';
-    } else {
-      scrollTop.style.opacity = '0';
+// Handle visibility change
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        const starfield = document.querySelector('.starfield');
+        if (starfield) {
+            starfield.remove();
+        }
+        createStarField();
     }
-  });
-  
-  document.getElementById('scroll-top').addEventListener('click', function() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
+});
+
+// Handle orientation change
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        const starfield = document.querySelector('.starfield');
+        if (starfield) {
+            starfield.remove();
+        }
+        createStarField();
+    }, 200);
+});
